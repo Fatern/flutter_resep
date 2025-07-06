@@ -101,4 +101,129 @@ const List<Recipe> recipesData = [
       'Sajikan dengan perasan jeruk nipis dan sambal untuk rasa yang lebih segar dan pedas.',
     ],
   ),
+  Recipe(
+    id: 'r5',
+    name: 'Omelet Sayur',
+    imageUrl: 'assets/images/omelet sayur.png', // PERBAIKAN
+    cookingTimeMinutes: 12,
+    estimatedCostCategory: 'Hemat',
+    ingredients: [
+      '2 butir telur',
+      '1/4 paprika, potong dadu',
+      '1 batang daun bawang, iris',
+      'Garam, merica',
+    ],
+    instructions: [
+      'Kocok lepas telur, garam, dan merica.',
+      'Masukkan potongan paprika dan daun bawang, aduk rata.',
+      'Panaskan sedikit minyak di teflon, tuang adonan telur.',
+      'Masak dengan api kecil hingga matang.',
+    ],
+    tips: ['Tambahkan keju parut di atasnya untuk rasa yang lebih gurih.'],
+  ),
+  Recipe(
+    id: 'r6',
+    name: 'Udang Saus Tiram',
+    imageUrl: 'assets/images/udang saus tiram.jpg', // PERBAIKAN
+    cookingTimeMinutes: 25,
+    estimatedCostCategory: 'Menengah',
+    ingredients: [
+      '250 gr udang',
+      '1 buah bawang bombay, iris',
+      '3 sdm saus tiram',
+      '1 sdm kecap manis',
+      'Air secukupnya',
+    ],
+    instructions: [
+      'Tumis bawang bombay hingga harum.',
+      'Masukkan udang, masak hingga berubah warna.',
+      'Tuangkan saus tiram, kecap manis, dan sedikit air.',
+      'Masak hingga bumbu meresap.',
+    ],
+    tips: [
+      'Gunakan udang segar untuk hasil terbaik.',
+      'Tambahkan irisan cabai jika suka pedas.',
+    ],
+  ),
+  Recipe(
+    id: 'r7',
+    name: 'Rendang Daging',
+    imageUrl: 'assets/images/rendang daging.jpg', // PERBAIKAN
+    cookingTimeMinutes: 120,
+    estimatedCostCategory: 'Menengah',
+    ingredients: [
+      '500 gr daging sapi',
+      '1 liter santan',
+      'Bumbu rendang instan',
+      'Daun kunyit dan daun jeruk',
+    ],
+    instructions: [
+      'Masukkan daging, santan, bumbu instan, dan daun-daunan ke dalam wajan.',
+      'Masak dengan api sedang sambil terus diaduk hingga santan mengering dan mengeluarkan minyak.',
+      'Kecilkan api, masak terus hingga rendang kering dan berwarna coklat gelap.',
+    ],
+    tips: [
+      'Mengaduk rendang secara berkala sangat penting agar tidak gosong di bagian bawah.',
+    ],
+  ),
+  Recipe(
+    id: 'r8',
+    name: 'Gulai Ikan Patin',
+    imageUrl: 'assets/images/Gulai Ikan Patin.jpg', // PERBAIKAN
+    cookingTimeMinutes: 40,
+    estimatedCostCategory: 'Menengah',
+    ingredients: [
+      '1 ekor ikan patin, potong-potong',
+      '500 ml santan',
+      'Bumbu gulai instan',
+      'Asam kandis',
+    ],
+    instructions: [
+      'Didihkan santan bersama bumbu gulai instan.',
+      'Masukkan potongan ikan patin dan asam kandis.',
+      'Masak hingga ikan matang dan bumbu meresap.',
+      'Jangan terlalu sering mengaduk agar ikan tidak hancur.',
+    ],
+    tips: ['Gunakan santan segar untuk kuah yang lebih gurih.'],
+  ),
+  Recipe(
+    id: 'r9',
+    name: 'Sayur Lodeh',
+    imageUrl: 'assets/images/sayur lodeh.jpg', // PERBAIKAN
+    cookingTimeMinutes: 35,
+    estimatedCostCategory: 'Hemat',
+    ingredients: [
+      '1 ikat kacang panjang',
+      '1 buah terong, potong',
+      '1 buah labu siam, potong',
+      '500 ml santan',
+      'Bumbu lodeh instan',
+    ],
+    instructions: [
+      'Rebus sayuran yang keras (seperti labu siam) terlebih dahulu hingga setengah matang.',
+      'Masukkan santan, bumbu instan, dan sisa sayuran.',
+      'Masak hingga semua sayuran matang.',
+    ],
+    tips: ['Tambahkan tempe atau tahu untuk protein tambahan.'],
+  ),
+  Recipe(
+    id: 'r10',
+    name: 'Opor Ayam',
+    imageUrl: 'assets/images/opor ayam.jpg', // PERBAIKAN
+    cookingTimeMinutes: 50,
+    estimatedCostCategory: 'Menengah',
+    ingredients: [
+      '1/2 ekor ayam',
+      '700 ml santan',
+      'Bumbu opor instan',
+      'Serai dan daun salam',
+    ],
+    instructions: [
+      'Tumis bumbu opor instan hingga harum.',
+      'Masukkan ayam, aduk hingga berubah warna.',
+      'Tuang santan, masukkan serai dan daun salam.',
+      'Masak hingga ayam empuk dan kuah mengental.',
+    ],
+    tips: ['Taburi dengan bawang goreng sebelum disajikan.'],
+  ),
 ];

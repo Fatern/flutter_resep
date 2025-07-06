@@ -17,4 +17,14 @@ class LocalStorageService {
   static bool getLoggedInStatus() {
     return _preferences?.getBool(AppConstants.kIsLoggedInKey) ?? false;
   }
+
+  // Method untuk menyimpan daftar ID resep favorit
+  static Future<void> saveFavoriteRecipeIds(List<String> ids) async {
+    await _preferences?.setStringList(AppConstants.kFavoriteRecipeIds, ids);
+  }
+
+  // Method untuk mengambil daftar ID resep favorit
+  static List<String> getFavoriteRecipeIds() {
+    return _preferences?.getStringList(AppConstants.kFavoriteRecipeIds) ?? [];
+  }
 }

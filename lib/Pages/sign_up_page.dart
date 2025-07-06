@@ -60,7 +60,9 @@ class _SignUpPageState extends State<SignUpPage> {
             top: 40,
             left: 16,
             child: CircleAvatar(
-              backgroundColor: Colors.black.withOpacity(0.2),
+              backgroundColor: Colors.black.withAlpha(
+                51,
+              ), // PERBAIKAN: Menggunakan withAlpha
               child: IconButton(
                 icon: const Icon(Icons.arrow_back, color: Colors.white),
                 onPressed: () => Navigator.of(context).pop(),
@@ -77,9 +79,13 @@ class _SignUpPageState extends State<SignUpPage> {
                   child: Container(
                     padding: const EdgeInsets.all(24.0),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.25),
+                      color: Colors.white.withAlpha(
+                        64,
+                      ), // PERBAIKAN: Menggunakan withAlpha
                       borderRadius: BorderRadius.circular(24.0),
-                      border: Border.all(color: Colors.white.withOpacity(0.3)),
+                      border: Border.all(
+                        color: Colors.white.withAlpha(77),
+                      ), // PERBAIKAN: Menggunakan withAlpha
                     ),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -128,7 +134,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               child: Text(
                                 'Saya setuju dengan Syarat Penggunaan dan Kebijakan Privasi',
                                 style: TextStyle(
-                                  color: Colors.white,
+                                  color: Color.fromARGB(255, 124, 124, 124),
                                   fontSize: 12,
                                 ),
                               ),
@@ -169,7 +175,9 @@ class _SignUpPageState extends State<SignUpPage> {
     return InputDecoration(
       hintText: hintText,
       filled: true,
-      fillColor: Colors.white.withOpacity(0.8),
+      fillColor: Colors.white.withAlpha(
+        204,
+      ), // PERBAIKAN: Menggunakan withAlpha
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12.0),
         borderSide: BorderSide.none,

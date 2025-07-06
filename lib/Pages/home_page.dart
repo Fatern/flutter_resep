@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_resep/data/recipes_data.dart';
+import 'package:flutter_resep/models/recipe.dart';
 import 'package:flutter_resep/services/local_storage_service.dart';
 import 'package:flutter_resep/widgets/recipe_card.dart';
 
@@ -13,11 +14,81 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<Recipe> _displayedRecipes = [];
+  String? _activeFilter;
+  List<String> _favoriteIds = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _displayedRecipes = List.from(recipesData);
+    _loadFavorites();
+  }
+
+  void _loadFavorites() {
+    if (mounted) {
+      setState(() {
+        _favoriteIds = LocalStorageService.getFavoriteRecipeIds();
+      });
+    }
+  }
+
   void _handleLogout() {
     LocalStorageService.setLoggedInStatus(false);
     Navigator.of(
       context,
     ).pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
+  }
+
+  void _applyFilter(String filter) {
+    List<Recipe> filteredList;
+
+    if (_activeFilter == filter) {
+      _clearFilter();
+      return;
+    }
+
+    switch (filter) {
+      case 'Cepat (≤15m)':
+        filteredList =
+            recipesData.where((r) => r.cookingTimeMinutes <= 15).toList();
+        break;
+      case 'Sedang (16-30m)':
+        filteredList =
+            recipesData
+                .where(
+                  (r) =>
+                      r.cookingTimeMinutes > 15 && r.cookingTimeMinutes <= 30,
+                )
+                .toList();
+        break;
+      case 'Hemat':
+        filteredList =
+            recipesData
+                .where((r) => r.estimatedCostCategory == 'Hemat')
+                .toList();
+        break;
+      case 'Menengah':
+        filteredList =
+            recipesData
+                .where((r) => r.estimatedCostCategory == 'Menengah')
+                .toList();
+        break;
+      default:
+        filteredList = List.from(recipesData);
+    }
+
+    setState(() {
+      _activeFilter = filter;
+      _displayedRecipes = filteredList;
+    });
+  }
+
+  void _clearFilter() {
+    setState(() {
+      _activeFilter = null;
+      _displayedRecipes = List.from(recipesData);
+    });
   }
 
   @override
@@ -52,7 +123,9 @@ class _HomePageState extends State<HomePage> {
               width: 24,
             ),
             onPressed: () {
-              // Navigasi ke halaman favorit
+              Navigator.of(
+                context,
+              ).pushNamed('/favorites').then((_) => _loadFavorites());
             },
           ),
           IconButton(
@@ -96,27 +169,23 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Row(
                 children: [
-                  Chip(
-                    label: const Text('Quick Filter'),
-                    labelStyle: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    backgroundColor: const Color(0xFF0D47A1),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                  const SizedBox(width: 8),
                   _buildFilterChip('Cepat (≤15m)'),
                   const SizedBox(width: 8),
                   _buildFilterChip('Sedang (16-30m)'),
                   const SizedBox(width: 8),
-                  _buildFilterChip('Standar (>30m)'),
-                  const SizedBox(width: 8),
                   _buildFilterChip('Hemat'),
                   const SizedBox(width: 8),
                   _buildFilterChip('Menengah'),
+                  if (_activeFilter != null)
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: ActionChip(
+                        label: const Text('Hapus Filter'),
+                        avatar: const Icon(Icons.close, size: 16),
+                        onPressed: _clearFilter,
+                        backgroundColor: Colors.red[100],
+                      ),
+                    ),
                 ],
               ),
             ),
@@ -131,10 +200,14 @@ class _HomePageState extends State<HomePage> {
                 mainAxisSpacing: 16,
                 childAspectRatio: 0.75,
               ),
-              itemCount: recipesData.length,
+              itemCount: _displayedRecipes.length,
               itemBuilder: (context, index) {
-                final recipe = recipesData[index];
-                return RecipeCard(recipe: recipe);
+                final recipe = _displayedRecipes[index];
+                return RecipeCard(
+                  recipe: recipe,
+                  isFavorited: _favoriteIds.contains(recipe.id),
+                  onPop: _loadFavorites,
+                );
               },
             ),
           ],
@@ -144,9 +217,18 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildFilterChip(String label) {
-    return Chip(
+    final bool isSelected = _activeFilter == label;
+    return ChoiceChip(
       label: Text(label),
-      labelStyle: const TextStyle(color: Color(0xFF333333)),
+      selected: isSelected,
+      onSelected: (selected) {
+        _applyFilter(label);
+      },
+      selectedColor: const Color(0xFF0D47A1),
+      labelStyle: TextStyle(
+        color: isSelected ? Colors.white : const Color(0xFF333333),
+        fontWeight: FontWeight.bold,
+      ),
       backgroundColor: const Color(0xFFFFD54F),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
     );
