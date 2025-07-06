@@ -5,6 +5,7 @@ import 'package:flutter_resep/data/recipes_data.dart';
 import 'package:flutter_resep/models/recipe.dart';
 import 'package:flutter_resep/services/local_storage_service.dart';
 import 'package:flutter_resep/widgets/recipe_card.dart';
+import 'package:flutter_resep/pages/detail_page.dart'; // Tambahkan ini
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -202,12 +203,8 @@ class _HomePageState extends State<HomePage> {
               ),
               itemCount: _displayedRecipes.length,
               itemBuilder: (context, index) {
-                final recipe = _displayedRecipes[index];
-                return RecipeCard(
-                  recipe: recipe,
-                  isFavorited: _favoriteIds.contains(recipe.id),
-                  onPop: _loadFavorites,
-                );
+                final recipe = recipesData[index];
+                return RecipeCard(recipe: recipe);
               },
             ),
           ],
